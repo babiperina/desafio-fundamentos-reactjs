@@ -23,8 +23,9 @@ const Import: React.FC = () => {
   const history = useHistory();
 
   async function handleUpload(): Promise<void> {
-    // const data = new FormData();
+    const data = new FormData();
 
+    console.log(uploadedFiles);
     // TODO
 
     try {
@@ -36,6 +37,21 @@ const Import: React.FC = () => {
 
   function submitFile(files: File[]): void {
     // TODO
+    console.log('to aqui');
+    console.log(files);
+
+    const response: FileProps[] = [];
+
+    files.forEach(file => {
+      const { name, size } = file;
+      const readableSize = String(size);
+
+      const fileProp = { file, name, readableSize } as FileProps;
+
+      response.push(fileProp);
+    });
+
+    setUploadedFiles(response);
   }
 
   return (
